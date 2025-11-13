@@ -18,6 +18,11 @@
                     <span>CTF Randomizer & Leet Converter</span>
                 </div>
             </div>
+            <div class="actions">
+                <button class="btn btn-ghost btn-icon" type="button" id="themeToggle">
+                    ☀️
+                </button>
+            </div>
         </header>
 
         <div class="grid">
@@ -33,7 +38,7 @@
                         Flag Format
                         <span>Example: CODEX → CODEX{random}</span>
                     </div>
-                    <input type="text" id="prefixInput" value="CODEX" autocomplete="off" />
+                    <input type="text" id="prefixInput" value="" autocomplete="off" />
                     <div class="subtext">
                         Enter the event name. Curly brackets will be added automatically.
                     </div>
@@ -94,10 +99,10 @@
 
                 <div class="field-group">
                     <div class="field-label">
-                        Flag Prefix (Optional)
+                        Flag Format (Optional)
                         <span>Example: CODEX → CODEX{leet}</span>
                     </div>
-                    <input type="text" id="leetPrefixInput" placeholder="Add Flag Format" autocomplete="off" />
+                    <input type="text" id="leetPrefixInput" placeholder="Flag Format" autocomplete="off" />
                     <div class="subtext">
                         If filled, final output becomes PREFIX{converted_leet}. Leave empty for pure leet result.
                     </div>
@@ -134,7 +139,7 @@
                 </div>
 
                 <div class="footer">
-                    <span>GitHub afrdian</span>
+                    <span>afrdian GitHub</span>
                 </div>
             </section>
         </div>
