@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -15,17 +15,8 @@
                 <div class="pill"></div>
                 <div class="main-title">
                     <span>Flag Generator</span>
-                    <span>CTF Flag &amp; Leet Converter</span>
+                    <span>CTF Randomizer & Leet Converter</span>
                 </div>
-            </div>
-            <div class="actions">
-                <!-- Toggle theme siang/malam -->
-                <button class="btn btn-ghost btn-icon" type="button" id="themeToggle" aria-label="Toggle theme">
-                    ☀️
-                </button>
-                <button class="btn btn-primary" type="button" onclick="generateFlag()">
-                    ⚡ Quick Generate
-                </button>
             </div>
         </header>
 
@@ -37,27 +28,21 @@
                     <small>Random uppercase / lowercase / digits</small>
                 </div>
 
-                <div class="tab-header">
-                    <div class="tab-pill primary">Random</div>
-                    <div class="tab-pill">Utility</div>
-                </div>
-
-                <!-- Format flag -->
                 <div class="field-group">
                     <div class="field-label">
-                        Format flag
-                        <span>Contoh: CODEX → CODEX{random}</span>
+                        Flag Format
+                        <span>Example: CODEX → CODEX{random}</span>
                     </div>
                     <input type="text" id="prefixInput" value="CODEX" autocomplete="off" />
                     <div class="subtext">
-                        Isi dengan nama event (misal: CODEX, HOLOGY8). Kurung kurawal ditambah otomatis.
+                        Enter the event name. Curly brackets will be added automatically.
                     </div>
                 </div>
 
                 <div class="field-group">
                     <div class="field-label">
-                        Panjang random body
-                        <span id="lengthLabel">16 karakter</span>
+                        Random Body Length
+                        <span id="lengthLabel">16 characters</span>
                     </div>
                     <div class="inline">
                         <input type="range" id="lengthSlider" min="6" max="100" value="16"
@@ -66,39 +51,29 @@
                             oninput="syncLengthFromInput()" />
                     </div>
                     <div class="subtext">
-                        Karakter: <code>A-Z a-z 0-9</code>. Hanya generator random, bukan hashing.
+                        Characters used: A-Z, a-z, 0-9
                     </div>
                 </div>
 
                 <div class="field-group">
                     <button class="btn btn-primary" type="button" onclick="generateFlag()">
-                        ⚙️ Generate Flag
+                        Generate Flag
                     </button>
                 </div>
 
                 <div class="field-group">
-                    <div class="field-label">Output flag</div>
+                    <div class="field-label">Generated Flag</div>
                     <div class="output-box" id="flagOutputBox">
-                        <span id="flagOutput" class="output-placeholder">
-                            Hasil flag akan muncul di sini...
-                        </span>
-                        <button class="copy-btn" type="button" onclick="copyFlag()">
-                            📋 Copy
-                        </button>
-                    </div>
-                    <div class="hint">
-                        Simpan sebagai flag CTF, sesuai event yang kamu isi di format flag.
+                        <span id="flagOutput" class="output-placeholder">Your generated flag will appear here...</span>
+                        <button class="copy-btn" type="button" onclick="copyFlag()">📋 Copy</button>
                     </div>
                 </div>
 
                 <hr class="section-divider" />
 
                 <div class="field-group">
-                    <div class="field-label">
-                        Riwayat singkat
-                        <span>Last 3</span>
-                    </div>
-                    <textarea id="historyBox" readonly placeholder="Belum ada flag yang digenerate."></textarea>
+                    <div class="field-label">Recent Flags <span>(Last 3)</span></div>
+                    <textarea id="historyBox" readonly placeholder="No flags generated yet."></textarea>
                 </div>
             </section>
 
@@ -106,75 +81,60 @@
             <section class="card">
                 <div class="card-header">
                     <span>Leet Converter</span>
-                    <small>Text → angka / simbol</small>
-                </div>
-
-                <div class="tab-header">
-                    <div class="tab-pill primary">Text → 1337</div>
-                    <div class="tab-pill">Optional styling</div>
+                    <small>Convert text → numbers / symbols</small>
                 </div>
 
                 <div class="field-group">
                     <div class="field-label">
-                        Input teks biasa
-                        <span>Contoh: halo kamu telat dapat flag nya</span>
+                        Input Text
+                        <span>Example: hello you are late</span>
                     </div>
-                    <textarea id="leetInput" rows="4"
-                        placeholder="Tulis kalimat yang mau diubah jadi gabungan huruf &amp; angka..."></textarea>
+                    <textarea id="leetInput" rows="4" placeholder="Enter text to convert into leetspeak..."></textarea>
                 </div>
 
-                <!-- FORMAT FLAG UNTUK LEET -->
                 <div class="field-group">
                     <div class="field-label">
-                        Format flag (opsional)
-                        <span>Contoh: CODEX → CODEX{leet}</span>
+                        Flag Prefix (Optional)
+                        <span>Example: CODEX → CODEX{leet}</span>
                     </div>
-                    <input type="text" id="leetPrefixInput" placeholder="Misal: CODEX" autocomplete="off" />
+                    <input type="text" id="leetPrefixInput" placeholder="Add Flag Format" autocomplete="off" />
                     <div class="subtext">
-                        Jika diisi, output leet dibungkus jadi <code>PREFIX{hasil_leet}</code>. Jika dikosongkan, keluar
-                        murni leet-nya saja.
+                        If filled, final output becomes PREFIX{converted_leet}. Leave empty for pure leet result.
                     </div>
                 </div>
 
                 <div class="field-group">
-                    <label style="display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted);">
+                    <label style="display:flex; gap:6px; font-size:11px; color:var(--text-muted);">
                         <input type="checkbox" id="randomCaseToggle" />
-                        Acak kapitalisasi (styling ala contoh kamu)
+                        Randomize uppercase/lowercase
                     </label>
                 </div>
 
                 <div class="field-group">
                     <button class="btn" type="button" onclick="convertLeet()">
-                        🔁 Convert ke Leet
+                        🔁 Convert to Leet
                     </button>
                 </div>
 
                 <div class="field-group">
-                    <div class="field-label">Output leet</div>
-                    <div class="output-box" id="leetOutputBox">
-                        <span id="leetOutput" class="output-placeholder">
-                            h4L0_k4mU_t3L4H_d4Pa7_Fl49_Ny4
-                        </span>
-                        <button class="copy-btn" type="button" onclick="copyLeet()">
-                            📋 Copy
-                        </button>
+                    <div class="field-label">Converted Output</div>
+                    <div class="output-box">
+                        <span id="leetOutput" class="output-placeholder">Converted text will appear here...</span>
+                        <button class="copy-btn" type="button" onclick="copyLeet()">📋 Copy</button>
                     </div>
                 </div>
 
                 <hr class="section-divider" />
 
                 <div class="field-group">
-                    <div class="field-label">Mapping yang dipakai</div>
+                    <div class="field-label">Mapping Rules</div>
                     <div class="subtext">
-                        A → 4, E → 3, T → 7, S → 5, g → 9, O → 0, l → 1, spasi → _
-                        <br />
-                        Huruf lain dibiarkan apa adanya, jadi masih manusiawi dibaca.
+                        A→4, E→3, T→7, S→5, G→9, O→0, L→1, space→_
                     </div>
                 </div>
 
                 <div class="footer">
-                    <span class="badge">Single-page · Static</span>
-                    <span>Cukup hosting di GitHub Pages.</span>
+                    <span>GitHub afrdian</span>
                 </div>
             </section>
         </div>
