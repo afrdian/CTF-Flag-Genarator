@@ -77,6 +77,16 @@ This project is free and open-source under the **MIT License**.
 
 ---
 
+## Theme
+
+- Dark Theme
+<img width="1826" height="927" alt="image" src="https://github.com/user-attachments/assets/1a0d5751-f395-49a7-9920-6516611f4454" />
+
+- Light Theme 
+<img width="1853" height="992" alt="image" src="https://github.com/user-attachments/assets/c04ad48f-ab5a-44e7-b5e0-b505fdb43300" />
+
+---
+
 ## ⭐ If You Like This Project  
 Give it a star on GitHub — it helps more CTF creators discover useful tools like this.
 
