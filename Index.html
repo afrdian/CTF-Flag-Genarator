@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Flag Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="app-shell">
+        <header class="top-bar">
+            <div class="title-wrap">
+                <div class="pill"></div>
+                <div class="main-title">
+                    <span>Flag Generator</span>
+                    <span>CTF Flag &amp; Leet Converter</span>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn btn-ghost" type="button">
+                    🔐 Local-only
+                </button>
+                <button class="btn btn-primary" type="button" onclick="generateFlag()">
+                    ⚡ Quick Generate
+                </button>
+            </div>
+        </header>
+
+        <div class="grid">
+            <!-- LEFT COLUMN -->
+            <section class="card">
+                <div class="card-header">
+                    <span>Flag Body Generator</span>
+                    <small>Random uppercase / lowercase / digits</small>
+                </div>
+
+                <div class="tab-header">
+                    <div class="tab-pill primary">Random</div>
+                    <div class="tab-pill">Utility</div>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-label">
+                        Prefix format
+                        <span>Contoh: CODEX atau HOLOGY8</span>
+                    </div>
+                    <div class="chip-row" id="presetChips">
+                        <div class="chip active" data-prefix="CODEX">CODEX{...}</div>
+                        <div class="chip" data-prefix="HOLOGY8">HOLOGY8{...}</div>
+                        <div class="chip" data-prefix="SRIFOTON">SRIFOTON{...}</div>
+                        <div class="chip" data-prefix="SCH25">SCH25{...}</div>
+                    </div>
+                    <input type="text" id="prefixInput" value="CODEX" autocomplete="off" />
+                    <div class="subtext">
+                        Prefix otomatis dibungkus dengan kurung kurawal, hasil: <code>PREFIX{random}</code>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-label">
+                        Panjang random body
+                        <span id="lengthLabel">16 karakter</span>
+                    </div>
+                    <div class="inline">
+                        <input type="range" id="lengthSlider" min="6" max="48" value="16"
+                            oninput="updateLengthLabel()" />
+                        <input type="number" id="lengthInput" min="6" max="64" value="16"
+                            oninput="syncLengthFromInput()" />
+                    </div>
+                    <div class="subtext">
+                        Karakter: <code>A-Z a-z 0-9</code>. Bukan hashing, cuma random generator.
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <button class="btn btn-primary" type="button" onclick="generateFlag()">
+                        ⚙️ Generate Flag
+                    </button>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-label">Output flag</div>
+                    <div class="output-box" id="flagOutputBox">
+                        <span id="flagOutput" class="output-placeholder">
+                            Hasil flag akan muncul di sini...
+                        </span>
+                        <button class="copy-btn" type="button" onclick="copyFlag()">
+                            📋 Copy
+                        </button>
+                    </div>
+                    <div class="hint">
+                        Simpan sebagai flag CTF kamu, jangan lupa ganti prefix sesuai event.
+                    </div>
+                </div>
+
+                <hr class="section-divider" />
+
+                <div class="field-group">
+                    <div class="field-label">
+                        Riwayat singkat
+                        <span>Last 3</span>
+                    </div>
+                    <textarea id="historyBox" readonly placeholder="Belum ada flag yang digenerate."></textarea>
+                </div>
+            </section>
+
+            <!-- RIGHT COLUMN -->
+            <section class="card">
+                <div class="card-header">
+                    <span>Leet Converter</span>
+                    <small>Text → angka / simbol</small>
+                </div>
+
+                <div class="tab-header">
+                    <div class="tab-pill primary">Text → 1337</div>
+                    <div class="tab-pill">Optional styling</div>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-label">
+                        Input teks biasa
+                        <span>Contoh: halo kamu telat dapat flag nya</span>
+                    </div>
+                    <textarea id="leetInput" rows="4"
+                        placeholder="Tulis kalimat yang mau diubah jadi gabungan huruf &amp; angka..."></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label style="display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted);">
+                        <input type="checkbox" id="randomCaseToggle" />
+                        Acak kapitalisasi (styling ala contoh kamu)
+                    </label>
+                </div>
+
+                <div class="field-group">
+                    <button class="btn" type="button" onclick="convertLeet()">
+                        🔁 Convert ke Leet
+                    </button>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-label">Output leet</div>
+                    <div class="output-box" id="leetOutputBox">
+                        <span id="leetOutput" class="output-placeholder">
+                            h4L0_k4mU_t3L4H_d4Pa7_Fl49_Ny4
+                        </span>
+                        <button class="copy-btn" type="button" onclick="copyLeet()">
+                            📋 Copy
+                        </button>
+                    </div>
+                </div>
+
+                <hr class="section-divider" />
+
+                <div class="field-group">
+                    <div class="field-label">Mapping yang dipakai</div>
+                    <div class="subtext">
+                        A → 4, E → 3, T → 7, S → 5, g → 9, O → 0, l → 1, spasi → _
+                        <br />
+                        Huruf lain dibiarkan apa adanya, jadi tetap kebaca manusia.
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <span class="badge">Single-page · Static</span>
+                    <span>Deploy santai via GitHub Pages atau yang sejenis.</span>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
