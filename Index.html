@@ -19,8 +19,9 @@
                 </div>
             </div>
             <div class="actions">
-                <button class="btn btn-ghost" type="button">
-                    🔐 Local-only
+                <!-- Toggle theme siang/malam -->
+                <button class="btn btn-ghost btn-icon" type="button" id="themeToggle" aria-label="Toggle theme">
+                    ☀️
                 </button>
                 <button class="btn btn-primary" type="button" onclick="generateFlag()">
                     ⚡ Quick Generate
@@ -29,7 +30,7 @@
         </header>
 
         <div class="grid">
-            <!-- LEFT COLUMN -->
+            <!-- LEFT COLUMN: RANDOM FLAG -->
             <section class="card">
                 <div class="card-header">
                     <span>Flag Body Generator</span>
@@ -41,20 +42,15 @@
                     <div class="tab-pill">Utility</div>
                 </div>
 
+                <!-- Format flag -->
                 <div class="field-group">
                     <div class="field-label">
-                        Prefix format
-                        <span>Contoh: CODEX atau HOLOGY8</span>
-                    </div>
-                    <div class="chip-row" id="presetChips">
-                        <div class="chip active" data-prefix="CODEX">CODEX{...}</div>
-                        <div class="chip" data-prefix="HOLOGY8">HOLOGY8{...}</div>
-                        <div class="chip" data-prefix="SRIFOTON">SRIFOTON{...}</div>
-                        <div class="chip" data-prefix="SCH25">SCH25{...}</div>
+                        Format flag
+                        <span>Contoh: CODEX → CODEX{random}</span>
                     </div>
                     <input type="text" id="prefixInput" value="CODEX" autocomplete="off" />
                     <div class="subtext">
-                        Prefix otomatis dibungkus dengan kurung kurawal, hasil: <code>PREFIX{random}</code>
+                        Isi dengan nama event (misal: CODEX, HOLOGY8). Kurung kurawal ditambah otomatis.
                     </div>
                 </div>
 
@@ -64,13 +60,13 @@
                         <span id="lengthLabel">16 karakter</span>
                     </div>
                     <div class="inline">
-                        <input type="range" id="lengthSlider" min="6" max="48" value="16"
+                        <input type="range" id="lengthSlider" min="6" max="100" value="16"
                             oninput="updateLengthLabel()" />
-                        <input type="number" id="lengthInput" min="6" max="64" value="16"
+                        <input type="number" id="lengthInput" min="6" max="100" value="16"
                             oninput="syncLengthFromInput()" />
                     </div>
                     <div class="subtext">
-                        Karakter: <code>A-Z a-z 0-9</code>. Bukan hashing, cuma random generator.
+                        Karakter: <code>A-Z a-z 0-9</code>. Hanya generator random, bukan hashing.
                     </div>
                 </div>
 
@@ -91,7 +87,7 @@
                         </button>
                     </div>
                     <div class="hint">
-                        Simpan sebagai flag CTF kamu, jangan lupa ganti prefix sesuai event.
+                        Simpan sebagai flag CTF, sesuai event yang kamu isi di format flag.
                     </div>
                 </div>
 
@@ -106,7 +102,7 @@
                 </div>
             </section>
 
-            <!-- RIGHT COLUMN -->
+            <!-- RIGHT COLUMN: LEET CONVERTER -->
             <section class="card">
                 <div class="card-header">
                     <span>Leet Converter</span>
@@ -125,6 +121,19 @@
                     </div>
                     <textarea id="leetInput" rows="4"
                         placeholder="Tulis kalimat yang mau diubah jadi gabungan huruf &amp; angka..."></textarea>
+                </div>
+
+                <!-- FORMAT FLAG UNTUK LEET -->
+                <div class="field-group">
+                    <div class="field-label">
+                        Format flag (opsional)
+                        <span>Contoh: CODEX → CODEX{leet}</span>
+                    </div>
+                    <input type="text" id="leetPrefixInput" placeholder="Misal: CODEX" autocomplete="off" />
+                    <div class="subtext">
+                        Jika diisi, output leet dibungkus jadi <code>PREFIX{hasil_leet}</code>. Jika dikosongkan, keluar
+                        murni leet-nya saja.
+                    </div>
                 </div>
 
                 <div class="field-group">
@@ -159,13 +168,13 @@
                     <div class="subtext">
                         A → 4, E → 3, T → 7, S → 5, g → 9, O → 0, l → 1, spasi → _
                         <br />
-                        Huruf lain dibiarkan apa adanya, jadi tetap kebaca manusia.
+                        Huruf lain dibiarkan apa adanya, jadi masih manusiawi dibaca.
                     </div>
                 </div>
 
                 <div class="footer">
                     <span class="badge">Single-page · Static</span>
-                    <span>Deploy santai via GitHub Pages atau yang sejenis.</span>
+                    <span>Cukup hosting di GitHub Pages.</span>
                 </div>
             </section>
         </div>
