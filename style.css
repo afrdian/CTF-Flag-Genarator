@@ -1,5 +1,6 @@
 :root {
-    --bg: #050816;
+    /* default: dark theme */
+    --bg: #020617;
     --bg-elevated: #0b1020;
     --bg-elevated-2: #10182a;
     --border-subtle: #20263a;
@@ -8,11 +9,22 @@
     --accent-hover: #6366f1;
     --text: #e5e7eb;
     --text-muted: #9ca3af;
-    --danger: #f97373;
     --radius-lg: 16px;
     --radius-xl: 20px;
     --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.6);
-    --shadow-subtle: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* LIGHT THEME OVERRIDE */
+body.light-theme {
+    --bg: #f9fafb;
+    --bg-elevated: #ffffff;
+    --bg-elevated-2: #e5e7eb;
+    --border-subtle: #d1d5db;
+    --text: #020617;
+    --text-muted: #4b5563;
+    --accent: #2563eb;
+    --accent-soft: rgba(37, 99, 235, 0.12);
+    --accent-hover: #1d4ed8;
 }
 
 * {
@@ -23,9 +35,14 @@ body {
     margin: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
-    background: radial-gradient(circle at top, #111827 0, #020617 40%, #020617 100%);
+    background: radial-gradient(circle at top, #111827 0, var(--bg) 40%, var(--bg) 100%);
     color: var(--text);
     min-height: 100vh;
+}
+
+/* lebih terang untuk light-mode */
+body.light-theme {
+    background: radial-gradient(circle at top, #e5e7eb 0, var(--bg) 40%, var(--bg) 100%);
 }
 
 .app-shell {
@@ -91,10 +108,19 @@ body {
     transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
 }
 
+body.light-theme .btn {
+    background: #e5e7eb;
+    border-color: rgba(148, 163, 184, 0.5);
+}
+
 .btn-primary {
     background: linear-gradient(135deg, var(--accent), #7c3aed);
     border-color: transparent;
     box-shadow: 0 10px 25px rgba(79, 70, 229, 0.45);
+}
+
+body.light-theme .btn-primary {
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
 }
 
 .btn-primary:hover {
@@ -110,9 +136,17 @@ body {
     background: rgba(15, 23, 42, 0.7);
 }
 
+body.light-theme .btn-ghost {
+    background: transparent;
+}
+
+body.light-theme .btn-ghost:hover {
+    background: rgba(209, 213, 219, 0.8);
+}
+
 .btn-icon {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     padding: 0;
     justify-content: center;
     border-radius: 999px;
@@ -133,6 +167,11 @@ body {
     box-shadow: var(--shadow-soft);
     position: relative;
     overflow: hidden;
+}
+
+body.light-theme .card {
+    background: linear-gradient(145deg, #ffffff 0, #e5e7eb 100%);
+    box-shadow: 0 12px 30px rgba(148, 163, 184, 0.5);
 }
 
 .card-header {
@@ -200,6 +239,14 @@ textarea {
     min-height: 0;
 }
 
+body.light-theme input[type="text"],
+body.light-theme input[type="number"],
+body.light-theme textarea {
+    background: #f9fafb;
+    border-color: #cbd5f5;
+    color: var(--text);
+}
+
 input[type="text"]:focus,
 input[type="number"]:focus,
 textarea:focus {
@@ -231,41 +278,14 @@ textarea {
     align-items: center;
 }
 
+body.light-theme .output-box {
+    background: #f3f4f6;
+    border-color: #cbd5f5;
+}
+
 .output-placeholder {
     color: #6b7280;
     font-style: italic;
-}
-
-.chip-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 4px;
-    margin-bottom: 6px;
-}
-
-.chip {
-    border-radius: 999px;
-    border: 1px solid rgba(55, 65, 81, 0.8);
-    background: rgba(15, 23, 42, 0.9);
-    padding: 4px 10px;
-    font-size: 11px;
-    color: var(--text-muted);
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.12s ease, border-color 0.12s ease;
-}
-
-.chip:hover {
-    background: rgba(30, 64, 175, 0.4);
-    border-color: rgba(59, 130, 246, 0.8);
-    color: #d1d5db;
-}
-
-.chip.active {
-    background: var(--accent-soft);
-    border-color: var(--accent);
-    color: #c7d2fe;
 }
 
 .inline {
@@ -314,6 +334,11 @@ textarea {
     background: rgba(15, 23, 42, 0.7);
 }
 
+body.light-theme .badge {
+    background: #e5e7eb;
+    border-color: #9ca3af;
+}
+
 .copy-btn {
     position: absolute;
     top: 7px;
@@ -328,6 +353,12 @@ textarea {
     display: inline-flex;
     align-items: center;
     gap: 4px;
+}
+
+body.light-theme .copy-btn {
+    background: #e5e7eb;
+    border-color: #9ca3af;
+    color: #4b5563;
 }
 
 .copy-btn:hover {
