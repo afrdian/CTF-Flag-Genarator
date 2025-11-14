@@ -414,3 +414,23 @@ body.light-theme .copy-btn {
         justify-content: flex-end;
     }
 }
+
+.repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.repo-link:hover {
+    opacity: 0.8;
+    color: var(--accent-hover);
+}
+
+.github-icon {
+    fill: currentColor;
+}
